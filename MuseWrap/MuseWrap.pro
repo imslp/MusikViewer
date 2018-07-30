@@ -27,6 +27,8 @@ QT +=  gui core network xml xmlpatterns printsupport concurrent svg qml quick he
 QMAKE_PROJECT_DEPTH = 0 # undocumented qmake flag to force absolute paths in make files
 
 
+
+
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
@@ -56,7 +58,8 @@ unix {
     INSTALLS += target
 }
 
-INCLUDEPATH += $$PWD/../includes $$PWD/../includes/thirdparty
+INCLUDEPATH += $$PWD/../includes/  \
+$$PWD/../includes/thirdparty
 
 android{
 
