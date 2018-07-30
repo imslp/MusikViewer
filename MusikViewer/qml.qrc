@@ -1,0 +1,46 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>images/ic_pause_black_48dp.png</file>
+        <file>images/ic_pause_white_48dp.png</file>
+        <file>images/ic_play_arrow_black_48dp.png</file>
+        <file>images/ic_play_arrow_white_48dp.png</file>
+        <file>images/ic_view_headline_black_48dp.png</file>
+        <file>images/ic_view_headline_white_48dp.png</file>
+        <file>images/ic_arrow_back_white_48dp.png</file>
+        <file>images/ic_arrow_forward_white_48dp.png</file>
+        <file>qt-logo.jpg</file>
+        <file>images/menu_white.png</file>
+        <file>images/ic_arrow_back_black_48dp.png</file>
+        <file>images/ic_arrow_upward_black_48dp.png</file>
+        <file>images/ic_folder_black_48dp.png</file>
+        <file>images/ic_folder_open_black_48dp.png</file>
+        <file>images/ic_insert_drive_file_black_48dp.png</file>
+        <file>images/ic_menu_black_48dp.png</file>
+        <file>DefaultFileDialog.qml</file>
+        <file>qml/ColorSlider.qml</file>
+        <file>qml/DefaultWindowDecoration.qml</file>
+        <file>qml/IconButtonStyle.qml</file>
+        <file>qml/IconGlyph.qml</file>
+        <file>qml/icons.ttf</file>
+        <file>qml/qmldir</file>
+        <file>images/ic_arrow_drop_up_black_48dp.png</file>
+        <file>ProgressDialog.qml</file>
+        <file>SideBar.qml</file>
+        <file>ExportDialog.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>About.qml</file>
+        <file>images/ic_folder_open_white_48dp.png</file>
+        <file>images/ic_file_music_grey600_48dp.png</file>
+        <file>About_qt.qml</file>
+        <file>icon/AppIcon_Muse2.fig</file>
+        <file>icon/googleplay.png</file>
+        <file>icon/googleplay.svg</file>
+        <file>icon/hdpi.png</file>
+        <file>icon/mdpi.png</file>
+        <file>icon/README.txt</file>
+        <file>icon/xhdpi.png</file>
+        <file>icon/xxhdpi.png</file>
+        <file>icon/xxxhdpi.png</file>
+    </qresource>
+</RCC>

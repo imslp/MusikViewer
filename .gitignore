@@ -1,0 +1,6 @@
+build-*/
+/.project
+/msAndroid/
+*.old
+*.a
+*.so

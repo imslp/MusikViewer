@@ -1,0 +1,137 @@
+language: cpp
+sudo: false
+
+env:
+  global:
+    - "ARTIFACTS_AWS_REGION=us-east-1"
+    - "ARTIFACTS_S3_BUCKET=vtest.musescore.org"
+    - secure: "lVj+9BBtJIjW3CwfXstvNyYVn0AkXEwTyiPmp4BprcheP78WIqZNC0uG2RjG9MgyHbZkprE7zRdqR9YPWTitg+XYkkD6+jPHRO+PQFLARuiTAX9yhUO53yQQZC2wMkQ#+bFuZsFmz1rfAsPHx3bXeZAMsz+Qnh8D2yIqqV7qxwWw="
+    - secure: "L+66yQZIZJTyIAfrG89ncKIkMAr4+UvaOZMsd420OSdnEH9kpdm5Kws8rG0VVLAtqhfQfi3K9DuC8Ub7IiXqil//h+I9WJ2LHKirWK0m/MkhTFC6hfi0uSnQCX/jud3Keewxf3ovgiKQvIw6VR37UC50YJM9+KhZKtsNYhGAdos="
+
+matrix:
+  fast_finish: true
+  allow_failures:
+            - env: "JOB=AppImage_x86_64"
+            - env: "JOB=AppImage_i686"
+            - env: "JOB=AppImage_armhf"
+            - env: "JOB=MacOSX"
+  include:
+    # 1st parallel build job - debug build on Ubuntu
+    - env: "JOB=Tests"
+      dist: precise
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-4.9
+            # not white listed - alsa
+            - libsndfile1
+            - wget
+            - make
+            - ant
+            - curl
+            - libasound2-dev
+            - portaudio19-dev
+            - libportmidi-dev
+            - libsndfile1-dev
+            - zlib1g-dev
+            - libfreetype6-dev
+            - libfontconfig1-dev
+            - lame
+            - libmp3lame-dev
+            - libegl1-mesa-dev
+            - libegl1-mesa
+            - ccache
+            - libpulse-dev
+            - libgtk2.0-bin
+            - libgstreamer0.10-0
+            - libgstreamer-plugins-base0.10-0
+      cache:
+        directories:
+          - $HOME/.ccache
+      before_install:
+        - "source build/travis/job1_Tests/environment.sh"
+      install:
+        - "./build/travis/job1_Tests/install.sh"
+      before_script:
+        - "./build/travis/job1_Tests/before_script.sh"
+      script:
+        - "./build/travis/job1_Tests/run_tests.sh"
+      after_script:
+        - ARTIFACTS_CACHE_CONTROL='public, max-age=315360000'
+        - 'ARTIFACTS_PATHS="$(ls vtest/html | tr "\n" ":")" artifacts upload'
+
+    # 2nd parallel build job - portable Linux AppImage 64-bit x86 build on CentOS
+    - env: "JOB=AppImage_x86_64"
+      addons:
+        apt:
+          packages:
+          - bsdtar
+          - curl
+          - zsync
+          - expect
+      services:
+        - docker
+      script:
+        - "if [[ $APPIMAGE_BUILD_ARCHS == *x86_64* ]]; then ./build/travis/job2_AppImage/build.sh --x86_64 --upload-branches $APPIMAGE_UPLOAD_BRANCHES; fi"
+
+    # 3rd parallel build job - portable Linux AppImage 32-bit x86 build on CentOS
+    - env: "JOB=AppImage_i686"
+      addons:
+        apt:
+          packages:
+          - bsdtar
+          - curl
+          - zsync
+          - expect
+      services:
+        - docker
+      script:
+        - "if [[ $APPIMAGE_BUILD_ARCHS == *i686* ]]; then ./build/travis/job2_AppImage/build.sh --i686 --upload-branches $APPIMAGE_UPLOAD_BRANCHES; fi"
+
+    # 4th parallel build job - portable Linux AppImage armhf build on Debian crosscompiler
+    - env: "JOB=AppImage_armhf"
+      addons:
+        apt:
+          packages:
+          - bsdtar
+          - curl
+          - zsync
+          - expect
+      services:
+        - docker
+      before_script:
+        - "sudo ./build/travis/job2_AppImage/set-binfmt-misc.sh"
+      script:
+        - "if [[ $APPIMAGE_BUILD_ARCHS == *armhf* ]]; then ./build/travis/job2_AppImage/build.sh --armhf --upload-branches $APPIMAGE_UPLOAD_BRANCHES; fi"
+    # 5th parallel build job - mac osx build
+    - env: "JOB=MacOSX"
+      os: osx
+      osx_image: xcode7.3
+      #cache:
+      #  directories:
+      #    - /usr/local/Cellar
+      before_install:
+        - openssl aes-256-cbc -K $encrypted_99b076488ab1_key -iv $encrypted_99b076488ab1_iv -in build/travis/resources/osuosl_nighlies_rsa.enc -out build/travis/resources/osuosl_nighlies_rsa -d
+        - source build/travis/job_macos/before_install.sh
+      install:
+        - source ./build/travis/job_macos/install.sh
+      script:
+        - "./build/travis/job_macos/script.sh"
+
+notifications:
+  email:
+    recipients:
+      secure: "rXxCEnDk34qZ4+sa7vK7SSudTzzaP9MqOovf60J01NvqO36sNO+SADt52nidDH8F4ZSCSnGJIaTxb5Xo0xVEVujWoXeib1yg/BbmHsw6ZyuwGI1t2CBPtenlPRL4e3WUrlOdXh4jnHUzam7/Fw3RQN7kjn115qM+qMlFLTq7Rqw="
+    on_success: change
+    on_failure: always
+  irc:
+    channels:
+      secure: "m/euey6Ov37mM7VY6EFfpy2iIE4QyjQoPTVNffCx7xOk99jr5uWMAKr5UlLItLDmviHgnmNHZEOPXwpoRPZA9kDnpKRuE4lPhMYrHqf5uX/7Zw8D84PbNGJgBAuciVLB0Bn+pm1zYtMNb38yu2VEunDED1Q92CegAjygknb/gFw="
+    on_success: change
+    on_failure: change
+    skip_join: true # reduces spam. Channel must not have mode +n set.
+  webhooks:
+    # trigger Buildtime Trend Service to parse Travis CI log
+    - https://buildtimetrend.herokuapp.com/travis

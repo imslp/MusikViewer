@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/styles">
+        <file alias="cchords_muse.xml">../share/styles/cchords_muse.xml</file>
+        <file alias="cchords_nrb.xml">../share/styles/cchords_nrb.xml</file>
+        <file alias="cchords_rb.xml">../share/styles/cchords_rb.xml</file>
+        <file alias="cchords_sym.xml">../share/styles/cchords_sym.xml</file>
+        <file alias="chords.xml">../share/styles/chords.xml</file>
+        <file alias="chords_jazz.xml">../share/styles/chords_jazz.xml</file>
+        <file alias="chords_std.xml">../share/styles/chords_std.xml</file>
+        <file alias="jazzchords.xml">../share/styles/jazzchords.xml</file>
+        <file alias="MuseJazz.mss">../share/styles/MuseJazz.mss</file>
+        <file alias="stdchords.xml">../share/styles/stdchords.xml</file>
+    </qresource>
+</RCC>

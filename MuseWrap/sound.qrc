@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/sound">
+        <file alias="FluidR3Mono_GM.sf3">../share/sound/FluidR3Mono_GM.sf3</file>
+        <file alias="FluidR3Mono_License.md">../share/sound/FluidR3Mono_License.md</file>
+    </qresource>
+</RCC>

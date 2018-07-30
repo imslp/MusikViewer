@@ -1,0 +1,28 @@
+#!/bin/sh
+
+echo "TRANSLATIONS = \\"
+uis=`find $1/share/locale/ -name "mscore_*.ts"`
+for a in $uis; do
+      echo "    " $a \\;
+      done
+
+uis=`find $1/share/locale/ -name "qt_*.ts"`
+for a in $uis; do
+      echo "    " $a \\;
+      done
+echo
+
+echo "FORMS = \\"
+uis=`find $1 -name "*.ui"`
+for a in $uis; do
+      echo "    " $a \\;
+      done
+echo
+
+echo "SOURCES = \\"
+uis=`find $1 -name "*.cpp"`
+for a in $uis; do
+      echo "    " $a \\;
+      done
+echo
+echo
