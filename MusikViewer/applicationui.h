@@ -79,7 +79,9 @@ public slots:
     void save();     
 #ifdef Q_OS_ANDROID
     void onActionCompleted(QString path, int fd);
+    void onApplicationStateChanged(Qt::ApplicationState applicationState);
 #endif
+
 
 
 private:

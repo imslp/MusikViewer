@@ -140,6 +140,10 @@ int main(int argc, char *argv[])
 
     QQuickView view(engine , Q_NULLPTR);
 
+#if defined(Q_OS_ANDROID)
+    QObject::connect(&app, SIGNAL(applicationStateChanged(Qt::ApplicationState)), &appui, SLOT(onApplicationStateChanged(Qt::ApplicationState)));
+#endif
+
 
 
     QScreen *screen = qApp->primaryScreen();

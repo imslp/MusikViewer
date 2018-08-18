@@ -50,6 +50,7 @@ ApplicationUI::ApplicationUI(QObject *parent) : QObject(parent)
     Android=true;
     AndroidChanged();
     connect(&futils , &FileDialogUtils::actionCompleted , this , &ApplicationUI::onActionCompleted);
+    connect(&m_shareUtils , &ShareUtils::fileUrlReceived , this ,  &ApplicationUI::openScore);
 #endif
 
     QString share_temp = QStandardPaths::standardLocations(QStandardPaths::AppDataLocation).value(0) + "/temp_share";
@@ -60,10 +61,10 @@ ApplicationUI::ApplicationUI(QObject *parent) : QObject(parent)
 
 ApplicationUI::~ApplicationUI()
 {
-        QString share_temp = QStandardPaths::standardLocations(QStandardPaths::AppDataLocation).value(0) + "/temp_share";
-        QDir dir(QStandardPaths::standardLocations(QStandardPaths::AppDataLocation).value(0));
-        dir.rmdir("temp_share");
-//        dir.remove("temp_share");
+    QString share_temp = QStandardPaths::standardLocations(QStandardPaths::AppDataLocation).value(0) + "/temp_share";
+    QDir dir(QStandardPaths::standardLocations(QStandardPaths::AppDataLocation).value(0));
+    dir.rmdir("temp_share");
+    //        dir.remove("temp_share");
 }
 
 void ApplicationUI::setEngine(QQmlEngine *value)
@@ -74,6 +75,27 @@ void ApplicationUI::setEngine(QQmlEngine *value)
 #endif
 
 }
+
+#ifdef Q_OS_ANDROID
+void ApplicationUI::onApplicationStateChanged(Qt::ApplicationState applicationState){
+    qDebug() << "S T A T E changed into: " << applicationState;
+    if(applicationState == Qt::ApplicationState::ApplicationSuspended) {
+        // nothing to do
+        return;
+    }
+    if(applicationState == Qt::ApplicationState::ApplicationActive) {
+        // if App was launched from VIEW or SEND Intent
+        // there's a race collision: the event will be lost,
+        // because App and UI wasn't completely initialized
+        // workaround: QShareActivity remembers that an Intent is pending
+        //        if(!mPendingIntentsChecked) {
+        //            mPendingIntentsChecked = true;
+        QString share_temp = QStandardPaths::standardLocations(QStandardPaths::AppDataLocation).value(0) + "/temp_share";
+        m_shareUtils.checkPendingIntents(share_temp);
+        //        }
+    }
+}
+#endif
 
 void ApplicationUI::setScoreView(Ms::MsScoreView *view)
 {
@@ -152,8 +174,12 @@ void ApplicationUI::openScore(QString path)
 {
     qDebug() << Q_FUNC_INFO << path;
     //    obj.OpenScore(QDir::currentPath() + "/Two.mscz");
-    QUrl url(path);
-    obj.OpenScore(url.toLocalFile());
+    if(path.startsWith("file:", Qt::CaseInsensitive)){
+        QUrl url(path);
+        obj.OpenScore(url.toLocalFile());
+    }else{
+        obj.OpenScore(path);
+    }
 
     Ms::Score *score = obj.getScore();
 

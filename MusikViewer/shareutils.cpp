@@ -47,6 +47,7 @@ ShareUtils::ShareUtils(QObject *parent)
 
 bool ShareUtils::checkMimeTypeView(const QString &mimeType)
 {
+    qDebug() << Q_FUNC_INFO;
     return mPlatformShareUtils->checkMimeTypeView(mimeType);
 }
 
@@ -67,6 +68,7 @@ void ShareUtils::sendFile(const QString &filePath, const QString &title, const Q
 
 void ShareUtils::viewFile(const QString &filePath, const QString &title, const QString &mimeType, const int &requestId, const bool &altImpl)
 {
+    qDebug() << Q_FUNC_INFO;
     mPlatformShareUtils->viewFile(filePath, title, mimeType, requestId, altImpl);
 }
 
@@ -82,31 +84,37 @@ void ShareUtils::checkPendingIntents(const QString workingDirPath)
 
 void ShareUtils::onShareEditDone(int requestCode)
 {
+    qDebug() << Q_FUNC_INFO;
     emit shareEditDone(requestCode);
 }
 
 void ShareUtils::onShareFinished(int requestCode)
 {
+    qDebug() << Q_FUNC_INFO;
     emit shareFinished(requestCode);
 }
 
 void ShareUtils::onShareNoAppAvailable(int requestCode)
 {
+    qDebug() << Q_FUNC_INFO;
     emit shareNoAppAvailable(requestCode);
 }
 
 void ShareUtils::onShareError(int requestCode, QString message)
 {
+    qDebug() << Q_FUNC_INFO;
     emit shareError(requestCode, message);
 }
 
 void ShareUtils::onFileUrlReceived(QString url)
 {
+    qDebug() << "File Url recieved" << url;
     emit fileUrlReceived(url);
 }
 
 void ShareUtils::onFileReceivedAndSaved(QString url)
 {
+    qDebug() << Q_FUNC_INFO;
     emit fileReceivedAndSaved(url);
 }
 

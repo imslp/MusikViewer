@@ -13,7 +13,7 @@
 //
 // see also /COPYRIGHT and /LICENSE
 
-package com.museviewer.examples.sharex;
+package com.musikViewer.examples.sharex;
 
 import org.qtproject.qt5.android.QtNative;
 
@@ -174,11 +174,11 @@ public class QShareActivity extends QtActivity
       // here's HowTo get it:
       Log.d("ekkescorner Intent Content URI: ", intentUri.toString());
       ContentResolver cR = this.getContentResolver();
-      MimeTypeMap mime = MimeTypeMap.getSingleton();
-      String fileExtension = mime.getExtensionFromMimeType(cR.getType(intentUri));
-      Log.d("ekkescorner Intent extension: ",fileExtension);
-      String mimeType = cR.getType(intentUri);
-      Log.d("ekkescorner Intent MimeType: ",mimeType);
+//      MimeTypeMap mime = MimeTypeMap.getSingleton();
+//      String fileExtension = mime.getExtensionFromMimeType(cR.getType(intentUri));
+//      Log.d("ekkescorner Intent extension: ",fileExtension);
+//      String mimeType = cR.getType(intentUri);
+//      Log.d("ekkescorner Intent MimeType: ",mimeType);
       String name = QShareUtils.getContentName(cR, intentUri);
       if(name != null) {
            Log.d("ekkescorner Intent Name:", name);
