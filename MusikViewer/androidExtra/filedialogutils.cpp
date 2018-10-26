@@ -63,6 +63,8 @@ void FileDialogUtils::addShortcutFromStandardLocation(const QString &name, QStan
 {
     QStringList readPaths = QStandardPaths::standardLocations(loc);
     QString path = readPaths.isEmpty() ? QString() : local ? readPaths.first() : readPaths.last();
+
+
     addShortcut(name, QStandardPaths::displayName(loc), path);
 }
 
@@ -83,7 +85,14 @@ void FileDialogUtils::addShortcut(const QString &name, const QString &visibleNam
     QJSValue o = engine->newObject();
     o.setProperty("name", visibleName);
     // TODO maybe some day QJSValue could directly store a QUrl
-    o.setProperty("url", url.toString());
+
+    QString _url = url.toString();
+
+    while(_url.endsWith("/")){
+        _url = _url.remove(_url.length()-1 , 1);
+    }
+
+    o.setProperty("url", _url);
 
     int length = m_shortcutDetails.property(QLatin1String("length")).toInt();
     m_shortcutDetails.setProperty(length, o);
@@ -107,9 +116,6 @@ void FileDialogUtils::populateShortcuts()
     addShortcutFromStandardLocation(QLatin1String("Music"), QStandardPaths::MusicLocation);
     addShortcutFromStandardLocation(QLatin1String("Movies"), QStandardPaths::MoviesLocation);
     addShortcutFromStandardLocation(QLatin1String("Documents"), QStandardPaths::DocumentsLocation);
-
-
-
     addShortcutFromStandardLocation(QLatin1String("home"), QStandardPaths::HomeLocation);
 
     //    addShortcutFromStandardLocation(QLatin1String("Data"), QStandardPaths::GenericDataLocation);

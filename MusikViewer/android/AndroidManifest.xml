@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<manifest package="org.imslp.MusikViewer" xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="1.1" android:versionCode="2" android:installLocation="auto">
+<manifest package="org.imslp.MusikViewer" xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="1.2" android:versionCode="2" android:installLocation="auto">
     <application android:hardwareAccelerated="true" android:name="org.qtproject.qt5.android.bindings.QtApplication" android:label="-- %%INSERT_APP_NAME%% --" android:icon="@drawable/icon">
         <activity android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|layoutDirection|locale|fontScale|keyboard|keyboardHidden|navigation" android:name="com.musikViewer.examples.sharex.QShareActivity" android:label="-- %%INSERT_APP_NAME%% --" android:screenOrientation="unspecified" android:launchMode="singleInstance">
             <intent-filter>
@@ -7,40 +7,6 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
 
-
-
-<intent-filter android:icon="@drawable/icon" android:label="MusikViewer" android:priority="50">
-    <action android:name="android.intent.action.VIEW"/>
-    <category android:name="android.intent.category.DEFAULT"/>
-    <data android:pathPattern=".*\\.mscz"/>
-    <data android:mimeType="*/*"/>
-    <data android:scheme="file"/>
-    <data android:scheme="content"/>
-</intent-filter>
-<intent-filter android:icon="@drawable/icon" android:label="MusikViewer" android:priority="50">
-    <action android:name="android.intent.action.VIEW"/>
-    <category android:name="android.intent.category.DEFAULT"/>
-    <data android:pathPattern=".*\\.mscx"/>
-    <data android:mimeType="*/*"/>
-    <data android:scheme="file"/>
-    <data android:scheme="content"/>
-</intent-filter>
-<intent-filter android:icon="@drawable/icon" android:label="MusikViewer" android:priority="50">
-    <action android:name="android.intent.action.VIEW"/>
-    <category android:name="android.intent.category.DEFAULT"/>
-    <data android:pathPattern=".*\\.xml"/>
-    <data android:mimeType="*/*"/>
-    <data android:scheme="file"/>
-    <data android:scheme="content"/>
-</intent-filter>
-<intent-filter android:icon="@drawable/icon" android:label="MusikViewer" android:priority="50">
-    <action android:name="android.intent.action.VIEW"/>
-    <category android:name="android.intent.category.DEFAULT"/>
-    <data android:pathPattern=".*\\.mxml"/>
-    <data android:mimeType="*/*"/>
-    <data android:scheme="file"/>
-    <data android:scheme="content"/>
-</intent-filter>
 
             <!-- Application arguments -->
             <!-- meta-data android:name="android.app.arguments" android:value="arg1 arg2 arg3"/ -->
@@ -94,12 +60,204 @@
                 -->
             <meta-data android:name="android.app.extract_android_style" android:value="full"/>
             <!-- extract android style -->
+
+
+
+ <intent-filter android:priority="1">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="file"/>
+                <data android:host="*"/>
+                <data android:pathPattern=".*\\.mscx"/>
+            </intent-filter>
+            <intent-filter android:priority="1">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="file"/>
+                <data android:host="*"/>
+                <data android:pathPattern=".*\\.MSCX"/>
+            </intent-filter>
+            <intent-filter android:priority="1">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="file"/>
+                <data android:host="*"/>
+                <data android:pathPattern=".*\\.mscz"/>
+            </intent-filter>
+            <intent-filter android:priority="1">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="file"/>
+                <data android:host="*"/>
+                <data android:pathPattern=".*\\.MSCZ"/>
+            </intent-filter>
+            <intent-filter android:priority="1">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="file"/>
+                <data android:host="*"/>
+                <data android:pathPattern=".*\\.musicxml"/>
+            </intent-filter>
+            <intent-filter android:priority="1">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="file"/>
+                <data android:host="*"/>
+                <data android:pathPattern=".*\\.MUSICXML"/>
+            </intent-filter>
+            <intent-filter android:priority="1">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="file"/>
+                <data android:host="*"/>
+                <data android:pathPattern=".*\\.xml"/>
+            </intent-filter>
+            <intent-filter android:priority="1">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="file"/>
+                <data android:host="*"/>
+                <data android:pathPattern=".*\\.XML"/>
+            </intent-filter>
+            <intent-filter android:priority="1">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="file"/>
+                <data android:host="*"/>
+                <data android:pathPattern=".*\\.mxl"/>
+            </intent-filter>
+            <intent-filter android:priority="1">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="file"/>
+                <data android:host="*"/>
+                <data android:pathPattern=".*\\.MXL"/>
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="file"/>
+                <data android:mimeType="*/*"/>
+                <data android:host="*"/>
+                <data android:pathPattern=".*\\.mscz"/>
+                <data android:pathPattern=".*\\..*\\.mscz"/>
+                <data android:pathPattern=".*\\..*\\..*\\.mscz"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\.mscz"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.mscz"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\.mscz"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\.mscz"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.mscz"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.mscz"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.mscz"/>
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="file"/>
+                <data android:mimeType="*/*"/>
+                <data android:host="*"/>
+                <data android:pathPattern=".*\\.mscx"/>
+                <data android:pathPattern=".*\\..*\\.mscx"/>
+                <data android:pathPattern=".*\\..*\\..*\\.mscx"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\.mscx"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.mscx"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\.mscx"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\.mscx"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.mscx"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.mscx"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.mscx"/>
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="file"/>
+                <data android:scheme="content"/>
+                <data android:mimeType="*/*"/>
+                <data android:host="*"/>
+                <data android:pathPattern=".*\\.mxl"/>
+                <data android:pathPattern=".*\\..*\\.mxl"/>
+                <data android:pathPattern=".*\\..*\\..*\\.mxl"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\.mxl"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.mxl"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\.mxl"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\.mxl"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.mxl"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.mxl"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="file"/>
+                <data android:scheme="content"/>
+                <data android:mimeType="*/*"/>
+                <data android:host="*"/>
+                <data android:pathPattern=".*\\.musicxml"/>
+                <data android:pathPattern=".*\\..*\\.musicxml"/>
+                <data android:pathPattern=".*\\..*\\..*\\.musicxml"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\.musicxml"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.musicxml"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\.musicxml"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\.musicxml"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.musicxml"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.musicxml"/>
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="content"/>
+                <data android:pathPattern=".*\\.mscz"/>
+                <data android:mimeType="application/octet-stream"/>
+                <data android:mimeType="application/mscz"/>
+                <data android:mimeType="application/x-musescore"/>
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="file"/>
+                <data android:host="*"/>
+                <data android:pathPattern=".*\\.mscz"/>
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="file"/>
+                <data android:host="*"/>
+                <data android:mimeType="application/x-musescore"/>
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="musescore"/>
+                <data android:host="score"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="musescore"/>
+                <data android:host="start"/>
+            </intent-filter>
+
     </activity>
 
     <provider android:name="android.support.v4.content.FileProvider" android:authorities="com.museviewer.sharex.fileprovider" android:grantUriPermissions="true" android:exported="false">
         <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/filepaths"/>
     </provider>
-
 
     <!-- For adding service(s) please check: https://wiki.qt.io/AndroidServices -->
 

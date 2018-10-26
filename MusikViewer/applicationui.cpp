@@ -51,6 +51,7 @@ ApplicationUI::ApplicationUI(QObject *parent) : QObject(parent)
     AndroidChanged();
     connect(&futils , &FileDialogUtils::actionCompleted , this , &ApplicationUI::onActionCompleted);
     connect(&m_shareUtils , &ShareUtils::fileUrlReceived , this ,  &ApplicationUI::openScore);
+    connect(&m_shareUtils , &ShareUtils::fileReceivedAndSaved , this ,  &ApplicationUI::openScore);
 #endif
 
     QString share_temp = QStandardPaths::standardLocations(QStandardPaths::AppDataLocation).value(0) + "/temp_share";

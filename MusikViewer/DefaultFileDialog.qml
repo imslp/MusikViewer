@@ -125,9 +125,11 @@ AbstractFileDialog{
 
 
                 var folder =  root.urlToPath(futils.__shortcuts[futils.__shortcuts.length-1].url)
+
                 if(folder.endsWith("/")){
                     folder = folder.slice(0,-1)
                 }
+
                 root.currpath = folder
                 root.folder = futils.__shortcuts[futils.__shortcuts.length-1].url
             }
@@ -309,7 +311,7 @@ AbstractFileDialog{
 
 
                             var folder = root.urlToPath(futils.__shortcuts[index].url)
-                            if(folder.endsWith("/")){
+                            while(folder.endsWith("/")){
                                 folder = folder.slice(0,-1)
                             }
                             root.currpath = folder //root.urlToPath(futils.__shortcuts[index].url)
@@ -403,7 +405,14 @@ AbstractFileDialog{
                     var str = root.urlToPath(url);
                     var regEx = new RegExp(currpath, "ig");
                     console.log("str " + str + " currpath " + currpath )
-                    text = currname + str.replace(regEx , "")
+
+                    var str2 = currname + str.replace(regEx , "");
+
+                    if(str2.endsWith("/")){
+                        str2 = str2.slice(0,-1)
+                    }
+
+                    text = str2
                 }
 
                 //                onTextChanged: {

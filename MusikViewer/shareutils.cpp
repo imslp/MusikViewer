@@ -114,7 +114,7 @@ void ShareUtils::onFileUrlReceived(QString url)
 
 void ShareUtils::onFileReceivedAndSaved(QString url)
 {
-    qDebug() << Q_FUNC_INFO;
+    qDebug() << Q_FUNC_INFO << "File Url recieved" << url;
     emit fileReceivedAndSaved(url);
 }
 
